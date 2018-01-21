@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
+using System.Web.Http.ExceptionHandling;
 
 namespace UnityPoc
 {
@@ -10,6 +8,8 @@ namespace UnityPoc
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            var exceptionLogger = config.DependencyResolver.GetService(typeof(IExceptionLogger));
+            config.Services.Replace(typeof(IExceptionLogger), exceptionLogger);
 
             // Web API routes
             config.MapHttpAttributeRoutes();
